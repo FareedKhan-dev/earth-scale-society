@@ -1,0 +1,91 @@
+name: validate
+
+# The notebook is the deliverable, so the thing worth checking on every push is
+# that it is still a well-formed notebook whose cells are still valid Python.
+# Executing it needs four H100s and four hours, so that is not what runs here.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  notebook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install the only thing this job needs
+        run: pip install pyyaml
+
+      - name: Notebook is valid JSON and valid Python
+        run: |
+          python - <<'PY'
+          import ast, json, sys
+          nb = json.load(open("earth-scale-society.ipynb", encoding="utf-8"))
+          cells = nb["cells"]
+          code = [c for c in cells if c["cell_type"] == "code"]
+          bad = []
+          for i, c in enumerate(code):
+              src = "".join(c["source"])
+              # shell escapes and magics are not Python, and are allowed
+              if any(l.lstrip().startswith(("!", "%")) for l in src.splitlines()):
+                  continue
+              try:
+                  ast.parse(src)
+              except SyntaxError as e:
+                  bad.append((i, e.lineno, e.msg))
+          counts = [c.get("execution_count") for c in code if c.get("execution_count")]
+          if counts != sorted(counts):
+              bad.append(("execution counts are not monotonic", None, None))
+          print(f"{len(cells)} cells, {len(code)} code, {len(cells) - len(code)} markdown")
+          if bad:
+              for b in bad:
+                  print("FAIL", b, file=sys.stderr)
+              sys.exit(1)
+          print("notebook OK")
+          PY
+
+      - name: Configs parse and agree with each other
+        run: |
+          python - <<'PY'
+          import glob, sys, yaml
+          need = {"seed", "rounds", "n_agents", "cut", "speak_fraction", "seeding",
+                  "topic", "graph_path", "table_path", "table_mode", "policy"}
+          fail = False
+          for f in sorted(glob.glob("configs/*.yaml")):
+              c = yaml.safe_load(open(f))
+              missing = need - set(c)
+              if missing:
+                  print(f"FAIL {f} missing {sorted(missing)}", file=sys.stderr)
+                  fail = True
+                  continue
+              # the influencer cut is a fifth of the population, everywhere
+              if c["cut"] * 5 != c["n_agents"]:
+                  print(f"FAIL {f} cut is not a fifth of n_agents", file=sys.stderr)
+                  fail = True
+              print(f"{f:<22} n_agents={c['n_agents']:,} rounds={c['rounds']:,}")
+          sys.exit(1 if fail else 0)
+          PY
+
+      - name: Codebook parses
+        run: |
+          python - <<'PY'
+          import json
+          cb = json.load(open("data/wvs7_codebook.json", encoding="utf-8"))
+          assert all(isinstance(v, dict) for v in cb.values())
+          print(f"{len(cb)} variables, {sum(len(v) for v in cb.values())} coded values")
+          PY
+
+      - name: No survey data was committed
+        run: |
+          if git ls-files | grep -Ei 'WVS_.*\.(csv|zip|dta|sav)$|survey_wave\.jsonl$'; then
+            echo "survey data must never be committed" >&2
+            exit 1
+          fi
+          echo "clean"

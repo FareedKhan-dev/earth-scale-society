@@ -1,0 +1,136 @@
+{
+  "Q260": {
+    "1": "Male",
+    "2": "Female"
+  },
+  "Q263": {
+    "1": "born in this country",
+    "2": "an immigrant to this country"
+  },
+  "Q265": {
+    "1": "citizen of this country",
+    "2": "not a citizen of this country"
+  },
+  "Q273": {
+    "1": "Married",
+    "2": "Living together as married",
+    "3": "Divorced",
+    "4": "Separated",
+    "5": "Widowed",
+    "6": "Single"
+  },
+  "Q275": {
+    "0": "Early childhood education or none",
+    "1": "Primary education (ISCED 1)",
+    "2": "Lower secondary education (ISCED 2)",
+    "3": "Upper secondary education (ISCED 3)",
+    "4": "Post-secondary non-tertiary education (ISCED 4)",
+    "5": "Short-cycle tertiary education (ISCED 5)",
+    "6": "Bachelor or equivalent (ISCED 6)",
+    "7": "Master or equivalent (ISCED 7)",
+    "8": "Doctoral or equivalent (ISCED 8)"
+  },
+  "Q279": {
+    "1": "employed full time",
+    "2": "employed part time",
+    "3": "self employed",
+    "4": "retired",
+    "5": "a homemaker",
+    "6": "a student",
+    "7": "unemployed",
+    "8": "in other work"
+  },
+  "Q281": {
+    "1": "Professional or technical",
+    "2": "Higher administrative",
+    "3": "Clerical",
+    "4": "Sales",
+    "5": "Service",
+    "6": "Skilled worker",
+    "7": "Semi-skilled worker",
+    "8": "Unskilled worker",
+    "9": "Farm worker",
+    "10": "Farm proprietor",
+    "11": "Armed forces",
+    "12": "Never had a job"
+  },
+  "Q284": {
+    "1": "Government or public",
+    "2": "Private business",
+    "3": "Private non-profit"
+  },
+  "Q285": {
+    "1": "the main earner",
+    "2": "not the main earner"
+  },
+  "Q286": {
+    "1": "saved money",
+    "2": "just got by",
+    "3": "spent some savings",
+    "4": "spent some savings and borrowed money"
+  },
+  "Q287": {
+    "1": "Upper class",
+    "2": "Upper middle class",
+    "3": "Lower middle class",
+    "4": "Working class",
+    "5": "Lower class"
+  },
+  "Q288": {
+    "1": "level 1",
+    "2": "level 2",
+    "3": "level 3",
+    "4": "level 4",
+    "5": "level 5",
+    "6": "level 6",
+    "7": "level 7",
+    "8": "level 8",
+    "9": "level 9",
+    "10": "level 10"
+  },
+  "Q289": {
+    "0": "not religious",
+    "1": "Roman Catholic",
+    "2": "Protestant",
+    "3": "Orthodox",
+    "4": "Jewish",
+    "5": "Muslim",
+    "6": "Hindu",
+    "7": "Buddhist",
+    "8": "Other Christian",
+    "9": "Other"
+  },
+  "H_SETTLEMENT": {
+    "1": "an urban area",
+    "2": "a rural area"
+  },
+  "G_TOWNSIZE2": {
+    "1": "under 5,000",
+    "2": "5,000 to 20,000",
+    "3": "20,000 to 100,000",
+    "4": "100,000 to 500,000",
+    "5": "500,000 and over"
+  },
+  "Q277": {
+    "0": "Early childhood education or none",
+    "1": "Primary education (ISCED 1)",
+    "2": "Lower secondary education (ISCED 2)",
+    "3": "Upper secondary education (ISCED 3)",
+    "4": "Post-secondary non-tertiary education (ISCED 4)",
+    "5": "Short-cycle tertiary education (ISCED 5)",
+    "6": "Bachelor or equivalent (ISCED 6)",
+    "7": "Master or equivalent (ISCED 7)",
+    "8": "Doctoral or equivalent (ISCED 8)"
+  },
+  "Q278": {
+    "0": "Early childhood education or none",
+    "1": "Primary education (ISCED 1)",
+    "2": "Lower secondary education (ISCED 2)",
+    "3": "Upper secondary education (ISCED 3)",
+    "4": "Post-secondary non-tertiary education (ISCED 4)",
+    "5": "Short-cycle tertiary education (ISCED 5)",
+    "6": "Bachelor or equivalent (ISCED 6)",
+    "7": "Master or equivalent (ISCED 7)",
+    "8": "Doctoral or equivalent (ISCED 8)"
+  }
+}

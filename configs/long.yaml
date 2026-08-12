@@ -1,0 +1,25 @@
+# Five thousand rounds. A hundred rounds is an early transient: at the standard
+# settings each influencee expects 1.866 exposures over a hundred rounds, so
+# 15.5% are never contacted at all and 99% coverage needs 247. Every equilibrium
+# claim, and the rare-event survival number, comes from this file.
+
+seed: 7
+rounds: 5000
+
+n_agents: 1000000000
+cut: 200000000
+speak_fraction: 0.01
+seeding: HD
+
+topic: "AI automation will lead to mass unemployment"
+
+m: 3
+graph_path: artifacts/lattice
+
+table_path: artifacts/atlas.npy
+codebook_path: artifacts/codebook.npz
+table_mode: codebook    # flipped to argmax for the survival comparison
+
+policy: all-table
+live_ratio: 0.0
+teacher_url: http://127.0.0.1:8000/v1

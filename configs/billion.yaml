@@ -1,0 +1,32 @@
+# The flagship run. One billion agents, one hundred rounds, zero model calls.
+#
+# Scale is one knob: n_agents. Everything downstream is derived from it, so this
+# same file at 1e6 gives the matched-scale control the variance section needs.
+
+seed: 7
+rounds: 100
+
+# --- population -------------------------------------------------------------
+n_agents: 1000000000
+cut: 200000000          # the loud fifth. Degree-rank relabelling puts influencers
+                        # in [0, cut), so an agent's role costs zero bytes to store.
+speak_fraction: 0.01    # of influencers, per round -> 2,000,000 speakers
+seeding: HD             # HA all-agree, HD half-disagree half-neutral, UN uniform
+
+topic: "AI automation will lead to mass unemployment"
+
+# --- graph ------------------------------------------------------------------
+m: 3                    # preferential attachment, mean degree 6.000
+graph_path: artifacts/lattice
+
+# --- the frozen policy ------------------------------------------------------
+table_path: artifacts/atlas.npy
+codebook_path: artifacts/codebook.npz
+table_mode: codebook    # codebook keeps all 27 channels. argmax destroys 18.
+
+# --- routing ----------------------------------------------------------------
+# all-table is the only setting that makes zero model calls. The other two exist
+# so the fidelity ladder has something to measure against.
+policy: all-table       # all-table | all-live | weighted
+live_ratio: 0.0
+teacher_url: http://127.0.0.1:8000/v1

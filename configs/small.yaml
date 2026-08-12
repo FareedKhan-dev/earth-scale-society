@@ -1,0 +1,25 @@
+# Twenty thousand agents: small enough to keep a live model in the loop, which
+# is what makes the fidelity ladder possible. Everything else matches billion.yaml
+# so scale is never confounded with inference mode.
+
+seed: 7
+rounds: 100
+
+n_agents: 20000
+cut: 4000
+speak_fraction: 0.01
+seeding: HD
+
+topic: "AI automation will lead to mass unemployment"
+
+m: 3
+graph_path: artifacts/lattice_small
+
+table_path: artifacts/atlas.npy
+codebook_path: artifacts/codebook.npz
+table_mode: codebook
+
+# swept over 0.0, 0.25, 0.5, 0.75, 1.0 to build the ladder
+policy: weighted
+live_ratio: 0.0
+teacher_url: http://127.0.0.1:8000/v1

@@ -1,0 +1,7 @@
+# Python 3.12. Six packages carry the whole system.
+torch==2.9.1          # trains the surrogate and runs the 900M-key table sweep
+vllm==0.11.2          # serves Qwen3-235B-A22B-Instruct-2507-FP8, tensor-parallel 4
+numpy==2.5.1          # the entire billion-agent runtime
+h5py==3.15.1          # the graph, in memory-mappable shards
+pyyaml==6.0.3         # run configs
+matplotlib==3.11.1    # every figure in the notebook
